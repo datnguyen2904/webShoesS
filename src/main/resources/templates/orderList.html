@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org./1999/xhtml" xmlns:sec="http://www.w3.org./1999/xhtml">
+<head th:replace="common/header :: common-header"/>
+<body>
+
+<div th:replace="adminHome :: navbarAdmin"> </div>
+
+<div class="container page-content">
+    <table id="table-article" class="table table-striped table-bordered table-hover">
+        <thead class="thead-dark">
+        <tr>
+            <th>ID Đơn hàng</th>
+            <th>Ngày đặt hàng</th>
+            <th>Ngày giao hàng</th>
+            <th>Trạng thái đơn hàng</th>
+            <th>Tổng thanh toán</th>
+            <th>Ghi chú</th>
+            <th>Chức năng</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr data-th-each="order : ${orders}">
+            <td th:text="${order.id}"></td>
+            <td th:text="${order.orderDate}"></td>
+            <td th:text="${order.shippingDate}"></td>
+            <td th:text="${order.orderStatus}"></td>
+            <td th:text="${#numbers.formatDecimal(order.orderTotal, 0, 'COMMA', 0, 'POINT')}"></td>
+            <td th:text="${order.note}"></td>
+            <td>
+                <form th:if="${order.orderStatus == 'Đang xử lý'}" th:action="@{/order/complete}" method="post">
+                    <input type="hidden" name="orderId" th:value="${order.id}" />
+                    <button type="submit" class="badge badge-primary btn-remove-border">HOÀN THÀNH </button>
+                </form>
+                <form th:if="${order.orderStatus == 'Đang xử lý'}" th:action="@{/order/cancel}">
+                    <input type="hidden" name="orderId" th:value="${order.id}" />
+                    <button type="submit" class="badge badge-danger btn-remove-border">HỦY BỎ </button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+<div th:replace="common/header :: body-scripts"> </div>
+
+<script>
+    $(document).ready(function() {
+        $('#table-article').DataTable({
+            stateSave: true
+        });
+    } );
+</script>
+
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org./1999/xhtml">
+<head th:replace="common/header :: common-header" />
+
+
+<body class="d-flex flex-column">
+<div th:replace="common/header :: navbar"> </div>
+
+<div class="container page-content mt-3 mb-3">
+  <div th:if="${addArticleSuccess}" class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Đã thêm sản phẩm vào giỏ hàng</strong>
+    <div class="d-flex mt-2">
+      <a th:href="@{/store}" class="btn btn-info rounded-pill mx-2"><i data-feather="arrow-left"></i> Tiếp tục mua sắm</a>
+      <a th:href="@{/shopping-cart/cart}" class="btn btn-primary rounded-pill mx-2">Đi đến Giỏ hàng <i data-feather="arrow-right"></i></a>
+    </div>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div th:if="${notEnoughStock}" class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Sản phẩm tạm hết hàng, không thể thêm vào giỏ hàng.</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6">
+          <img class="img-fluid" th:src="'/image/article/pictures/'+${article.picture}+'.jpg'">
+        </div>
+        <div class="col-md-6 mt-3 mt-md-0">
+          <h2 class="card-title" th:text="${article.title}"></h2>
+          <div class="d-flex align-items-center">
+            <h2 class="price font-weight-bold mr-3">
+              <span th:text="${#numbers.formatDecimal(article.price, 0, 'COMMA', 0, 'POINT')}+'đ'"></span>
+            </h2>
+            <h6>(<span th:text="${article.stock}"></span> sản phẩm có sẵn)</h6>
+          </div>
+          <p class="d-none d-lg-block">Khám phá đôi giày <strong><span th:text="${article.title}"></span></strong>, nó là sự kết hợp hoàn hảo giữa chất lượng và phong cách. Sản phẩm mang lại độ thoải mái vượt trội, hỗ trợ tối ưu cho chân và độ bền cao. Chất liệu cao cấp, kiểu dáng hiện đại, màu sắc tinh tế. Sản phẩm ứng dụng công nghệ tiên tiến, giúp tạo độ êm, lực hỗ trợ và giảm áp lực mỏi chân. Hãy trải nghiệm sự tự tin và thoải mái tuyệt vời cùng <strong><span th:text="${article.title}"></span></strong>. Với mức giá hấp dẫn, đừng bỏ lỡ cơ hội sở hữu sản phẩm ấn tượng này!
+          </p>
+          <form th:action="@{/shopping-cart/add-item}" method="post">
+            <input hidden="hidden" th:field="*{article.id}">
+            <div class="form-row">
+              <div class="form-group col-sm-3">
+                <label class="font-weight-bold d-block">Kích thước</label>
+                <select class="form-control" id="size" th:name="size">
+                  <option th:each="size : ${article.sizes}" th:value="${size.getValue()}" th:text="${size.getValue()}"></option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-sm-3">
+                <label class="font-weight-bold" for="quantity">Số lượng</label>
+                <select class="form-control" id="quantity" th:name="qty">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                </select>
+              </div>
+              <div class="form-group col-sm-6 offset-sm-3 d-flex align-items-end">
+                <button type="submit" class="btn btn-primary btn-block rounded-pill atc-demo">Thêm vào Giỏ hàng</button>
+              </div>
+            </div>
+          </form>
+          <hr>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div th:replace="common/header :: footer"> </div>
+<div th:replace="common/header :: body-scripts"> </div>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org./1999/xhtml">
+<head th:replace="common/header :: common-header" />
+
+
+<body class="d-flex flex-column">
+<div th:replace="common/header :: navbar"> </div>
+
+<div class="container page-content">
+  <div class="card">
+    <div class="card-body">
+      <div class="text-center py-3">
+        <i data-feather="check-circle" class="text-success" width="48" height="48"></i>
+        <h3>Cảm ơn khách hàng đã tin tưởng và lựa chọn sản phẩm của chúng tôi</h3>
+        <p>Đơn đặt hàng của bạn đã được đặt và sẽ được xử lý ngay khi có thể.</p>
+        <p class="mb-0">
+          <span class="text-muted">Mã Đơn hàng: </span>
+          <span class="text-info">#ORD<span th:text="${order.id}"></span></span>
+        </p>
+        <p>
+          <span class="text-muted">Tổng thanh toán: </span>
+          <span class="text-info"><span th:text="${#numbers.formatDecimal(order.orderTotal, 0, 'COMMA', 0, 'POINT')}+'đ'"></span></span>
+        </p>
+        <p>Ngày giao hàng dự kiến là <span th:text="${#dates.format(order.shippingDate, 'dd-MMM-yyyy')}"></span></p>
+        <a th:href="@{/store}" class="btn btn-info rounded mb-3">Tiếp tục mua sắm</a>
+        <a th:href="@{/order-detail?order=}+${order.id}" class="btn btn-primary rounded mb-3">Xem Đơn hàng</a>
+      </div>
+    </div>
+  </div>
+</div> <!-- end container -->
+
+<div th:replace="common/header :: footer"> </div>
+<div th:replace="common/header :: body-scripts"> </div>
+</body>
+</html>

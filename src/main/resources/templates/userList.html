@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org./1999/xhtml" xmlns:sec="http://www.w3.org./1999/xhtml">
+<head th:replace="common/header :: common-header"/>
+<body>
+
+<div th:replace="adminHome :: navbarAdmin"> </div>
+
+<div class="container page-content">
+  <table id="table-article" class="table table-striped table-bordered table-hover">
+    <thead class="thead-dark">
+    <tr>
+      <th>Tên đăng nhập</th>
+      <th>Họ tên</th>
+      <th>Email</th>
+      <th>Trạng thái</th>
+      <th>Chức năng</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr data-th-each="user : ${users}">
+      <td th:text="${user.username}"></td>
+      <td th:text="${user.firstName == null ? '' : user.firstName}+' '+${user.lastName == null ? '' : user.lastName}"></td>
+      <td th:text="${user.email}"></td>
+      <td th:text="${user.isDeleted == true ? 'Đã xóa' : 'Hoạt động'}"></td>
+      <td>
+
+      <a th:if="${user.isDeleted == true}" th:href="@{/users/delete?id=}+${user.id}" class="badge  badge-primary" th:text="${user.isDeleted == true ? 'Kích hoạt' : 'Xóa'}"> </a>
+        <a th:if="${user.isDeleted == false || user.isDeleted == null}" th:href="@{/users/delete?id=}+${user.id}" class="badge  badge-danger" th:text="${user.isDeleted == true ? 'Kích hoạt' : 'Xóa'}"> </a>
+
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+
+
+<div th:replace="common/header :: body-scripts"> </div>
+
+<script>
+  $(document).ready(function() {
+    $('#table-article').DataTable({
+      stateSave: true
+    });
+  } );
+</script>
+
+</body>
+</html>

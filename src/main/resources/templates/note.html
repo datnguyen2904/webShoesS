@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org./1999/xhtml" xmlns:sec="http://www.w3.org./1999/xhtml">
+<head th:replace="common/header :: common-header"/>
+<body>
+
+<div th:replace="adminHome :: navbarAdmin"> </div>
+
+<div class="container page-content">
+    <form th:action="@{/order/cancel}" method="post">
+        <div class="">
+            <input type="hidden" name="orderId" th:value="${order.id}" />
+            <h3>Lý do huỷ đơn hàng</h3>
+            <textarea type="text" name="note" class="form-control" style="height: 300px" required> </textarea>
+            <br>
+            <div class="input-group-append justify-content-center">
+                <button class="btn btn-danger mr-3" type="submit">HUỶ BỎ </button>
+                <a th:href="@{/order/order-list}" class="badge badge-primary btn-sm a-in-btn">QUAY LẠI DANH SÁCH ĐƠN HÀNG </a>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+<div th:replace="common/header :: body-scripts"> </div>
+
+<script>
+    $(document).ready(function() {
+        $('#table-article').DataTable({
+            stateSave: true
+        });
+    } );
+</script>
+
+</body>
+</html>

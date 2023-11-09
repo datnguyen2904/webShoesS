@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org./1999/xhtml" xmlns:sec="http://www.w3.org./1999/xhtml">
+<head th:replace="common/header :: common-header"/>
+<body>
+
+<div th:replace="adminHome :: navbarAdmin"> </div>
+
+
+
+<div class="container page-content">
+  <form method="post" action="/order/report-list">
+    <div class="d-flex justify-content-between mb-3">
+    <input class="form-control" type="date" name="fromDate" th:value="${fromDate}" >
+    <input class="form-control" type="date" name="toDate" th:value="${toDate}" >
+    <button class="btn btn-success" type="submit">Lọc</button></div>
+  </form>
+  <table class="table table-striped table-bordered table-hover">
+    <thead class="thead-dark">
+    <tr>
+      <th>Tên sản phẩm</th>
+      <th>Tổng số lượng bán được</th>
+      <th>Tổng số tiền</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr data-th-each="report : ${reports}">
+      <td th:text="${report.productName}"></td>
+      <td th:text="${report.qty}"></td>
+      <td th:text="${#numbers.formatDecimal(report.orderTotal, 0, 'COMMA', 0, 'POINT')}+'đ'"></td>
+    </tr>
+    <tr>
+      <td >Tổng</td>
+      <td ></td>
+      <td th:text="${#numbers.formatDecimal(sum, 0, 'COMMA', 0, 'POINT')}+'đ'"></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+
+
+<div th:replace="common/header :: body-scripts"> </div>
+
+<!--<script>-->
+<!--  $(document).ready(function() {-->
+<!--    $('#table-article').DataTable({-->
+<!--      stateSave: true-->
+<!--    });-->
+<!--  } );-->
+<!--</script>-->
+
+</body>
+</html>

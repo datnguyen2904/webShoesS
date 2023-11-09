@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org./1999/xhtml" xmlns:sec="http://www.w3.org./1999/xhtml">
+<head th:replace="common/header :: common-header"></head>
+
+<body class="d-flex flex-column">
+<div th:fragment="navbarAdmin">
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4 fixed-top">
+    <a class="navbar-brand" th:href="@{/article/article-list}">ADMIN PORTAL</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarCollapse" aria-controls="navbarCollapse"
+            aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+             role="button" data-toggle="dropdown" aria-haspopup="true"
+             aria-expanded="false">Quản lý sản phẩm </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" th:href="@{/article/add}">Thêm sản phẩm</a>
+            <a class="dropdown-item" th:href="@{/article/article-list}">Danh sách sản phẩm</a>
+          </div>
+        </li>
+      </ul>
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+             role="button" data-toggle="dropdown" aria-haspopup="true"
+             aria-expanded="false">Quản lý khách hàng </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" th:href="@{/users/user-list}">Danh sách khách hàng</a>
+          </div>
+        </li>
+      </ul>
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownOrder"
+             role="button" data-toggle="dropdown" aria-haspopup="true"
+             aria-expanded="false"> Quản lý đơn hàng </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownOrder">
+            <a class="dropdown-item" th:href="@{/order/order-list}">Danh sách đơn hàng</a>
+
+          </div>
+        </li>
+      </ul>
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownOrder"
+             role="button" data-toggle="dropdown" aria-haspopup="true"
+             aria-expanded="false"> Thống kê </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownOrder">
+            <a class="dropdown-item" th:href="@{/order/report-list}">Thống kê doanh thu</a>
+
+          </div>
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/}"> Quay lại trang chủ </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/logout}"> Đăng xuất </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>
+
+
+<div th:replace="common/header :: body-scripts"> </div>
+
+
+
+</body>
+</html>
