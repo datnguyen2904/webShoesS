@@ -28,4 +28,7 @@ public interface ArticleService {
 
 	List<String> getAllBrands();
 
+//	List<String> getBrands();
+// 	List<String> getCategories();
+
 }

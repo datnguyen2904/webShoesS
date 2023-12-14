@@ -24,6 +24,7 @@
           <input type="text" class="form-control" id="categories" name="category" data-role="tagsinput">
         </div>
         <div class="col-4">
+
           <button type=button class="btn btn-primary btn-category badge badge-pill badge-primary mr-1 mb-1" th:each="item : ${allCategories}"
                   th:text="${item}" th:id="item+${category}"></button>
         </div>
