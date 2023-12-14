@@ -7,7 +7,7 @@ import com.nhom1.store.domain.ShoppingCart;
 
 
 public interface ShoppingCartService {
-
+//toan
 	ShoppingCart getShoppingCart(User user);
 	
 	int getItemsNumber(User user);
