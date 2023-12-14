@@ -68,6 +68,7 @@ public class AccountController {
 		model.addAttribute("user", user);
 		return "myAddress";
 	}
+	//Giang nhom03
 	
 	@RequestMapping(value="/update-user-address", method=RequestMethod.POST)
 	public String updateUserAddress(@ModelAttribute("address") Address address, 
